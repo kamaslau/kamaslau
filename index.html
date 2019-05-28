@@ -242,14 +242,22 @@
   </main>
 
   <footer id="footer" class="mt-auto">
-    <div class="container">
-      <p class="text-center">
+    <div class="container text-center">
+      <p>
         &copy;2019 <a title="青岛外包开发、技术合伙人、全栈工程师 刘亚杰" href="https://www.liuyajie.com/">刘亚杰@青岛 - Lau,Kamas</a><br><small>鲁ICP备16033133号-1</small>
       </p>
+      <p id="footer-useragent"></p>
     </div>
   </footer>
 
   <!-- 以下为JavaScript文件/业务代码 -->
+  <script>
+    // 输出UserAgent
+    const userAgent = navigator.userAgent
+    document.getElementById('footer-useragent').innerText = userAgent
+    console.log(userAgent)
+  </script>
+  
   <!-- 百度统计 -->
   <script defer>
     var _hmt = _hmt || [];
