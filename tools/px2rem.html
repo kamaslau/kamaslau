@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang=zh-cn>
+<head>
+  <meta charset=utf-8>
+  <meta http-equiv=x-dns-prefetch-control content=on>
+  <link rel=dns-prefetch href="https://cdn.liuyajie.com/">
+  <title>px2rem</title>
+  <meta name=description content="">
+  <meta name=keywords content="">
+  <meta name=version content="revision20200202">
+  <meta name=author content="KamasLau">
+  <meta name=copyright content="KamasLau,GNU GPLv3.0">
+  <meta name=contact content="kamaslau@dingtalk.com">
+
+  <meta name=viewport content="width=device-width">
+  
+  <link rel="stylesheet" href="https://cdn.liuyajie.com/bootstrap/4.4.1/bootstrap.min.css">
+  <style>
+    html {font-size:16px;}
+    
+    input {text-align:center;font-weight:bold;}
+    
+    #selector {text-align:center;display:flex;justify-content:space-between;}
+      #selector>* {flex-grow:1;}
+      #selector>div {display:flex;flex-direction:column;align-items:center;}
+      #selector span {font-size:3rem;}
+      #selector input {font-size:2.5rem;width:8rem;}
+    
+    @media only screen and (min-width:750px) {
+      #selector {justify-content:center;}
+        #selector>* {flex-grow:0;}
+        #selector span {width:5rem;}
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container jumbotron">
+      <h1>px2rem</h1>
+      <p>根据html根元素的字号，进行px与rem间互相转换。锁定px时，根据html的font-size属性计算rem单位值（保留3位小数）；锁定rem时，则计算px单位值。</p>
+    </div>
+  </header>
+
+  <main id="app">
+    <div class="container">
+      <h2>转换器</h2>
+
+      <div class="text-center">
+        <div id="html_size">
+          <p>html {font-size: <input name=html_size type=number step="1" min="1" max="100" v-model="html_size">px;}</p>
+          <input name="html_size" type="range" step="1" min="1" max="100" v-model="html_size">
+        </div>
+
+        <div id="selector">
+          <div><input name=px type=number v-model="px" min="0"><em>px</em></div>
+          <span>=</span>
+          <div><input name=rem type=number v-model="rem" min="0"><em>rem</em></div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="quick-ref" class="container">
+      <h2>速查表</h2>
+
+      <table class="table table-hover table-striped text-center">
+        <thead class="thead-light">
+          <tr>
+            <th>px</th>
+            <th>rem</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <tr v-for="i in 50" :key="'px-' + i">
+            <td>{{ i }}</td>
+            <td>{{ (i / html_size).toFixed(3) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer>
+    <div class=container>
+      <p>&copy;2020 <a title="青岛外包开发、技术合伙人、全栈工程师 刘亚杰" href="https://www.liuyajie.com/">刘亚杰@青岛 - Lau,Kamas</a> <a rel="nofollow,noindex" href="http://www.beian.miit.gov.cn/" target="_blank">鲁ICP备16033133号</a></p>
+    </div>
+  </footer>
+  
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        lock: 'html', // 需锁定的值
+        html_size: 16, // html元素的font-size值
+        px: 16,
+        rem: 1
+      },
+
+      watch: {
+        html_size(current) {
+          if (current.length > 0) this.px = this.rem * current
+        },
+
+        px(current) {
+          if (current.length > 0) this.rem = current / this.html_size // 保留3位小数
+        },
+
+        rem(current) {
+          if (current.length > 0) this.px = current * this.html_size
+        }
+      }
+    })
+  </script>
+</body>
+</html>
