@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang=zh-cn>
+<head>
+  <meta charset=utf-8>
+  <meta http-equiv=x-dns-prefetch-control content=on>
+  <link rel=dns-prefetch href="https://cdn.liuyajie.com/">
+  <title>中华人民共和国县以上行政区划及代码</title>
+  <meta name=description content="">
+  <meta name=keywords content="">
+  <meta name=version content="revision20200203">
+  <meta name=author content="KamasLau">
+  <meta name=copyright content="KamasLau,GNU GPLv3.0">
+  <meta name=contact content="kamaslau@dingtalk.com">
+  
+  <meta name=viewport content="width=device-width">
+
+  <link rel="stylesheet" href="https://cdn.liuyajie.com/bootstrap/4.4.1/bootstrap.min.css">
+  <style>
+    html {font-size:16px;}
+    
+    @media only screen and (min-width:750px) {
+    
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container jumbotron">
+      <h1>中华人民共和国县以上行政区划及代码</h1>
+      <p>政府数据更新于 2019年12月25日</p>
+    </div>
+  </header>
+  
+  <main id="app" class="row">
+    <div class="col-12" class="container">
+      source: {{ source }}
+    </div>
+
+    <div id="source_html" class="container col">
+      <h2>source_html</h2>
+
+      <table>
+        <tbody v-html="source_html"></tbody>
+      </table>
+    </div>
+  
+    <div id="items" class="container col">
+      <h2>items</h2>
+      
+      <pre>{{ items }}</pre>
+    </div>
+  </main>
+  
+  <footer>
+    <div class=container>
+      <p>&copy;2020 <a title="青岛外包开发、技术合伙人、全栈工程师 刘亚杰" href="https://www.liuyajie.com/">刘亚杰@青岛 - Lau,Kamas</a> <a rel="nofollow,noindex" href="http://www.beian.miit.gov.cn/" target="_blank">鲁ICP备16033133号</a></p>
+    </div>
+  </footer>
+  
+  <!-- JavaScripts -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        source: {
+          url: 'http://www.mca.gov.cn/article/sj/xzqh/2019/2019/201912251506.html',
+          start_html: '<tr height=19',
+          end_html: '<tr height=28'
+        },
+        source_html: '数据解析中',
+        source_doms: null,
+        items: []
+      },
+      
+      created() {
+        if (console) console.log('created with items: ', this.items)
+
+        this.curl(this.source)
+      },
+      
+      methods: {
+        curl(source) {
+          // console.log('method.curl called with url: ', url)
+          
+          const that = this
+          
+          const api_url = 'https://api.imakp.liuyajie.com/tool/curl'
+
+          // 请求参数
+          const params = {
+            ...source
+          }
+
+          // 将参数转为FormData进行发送
+          const form_data = new FormData()
+          Object.keys(params).forEach(
+              key => {
+                form_data.append(key, params[key])
+                // console.log(form_data.get(key)) // FormData对象无法直接console.log，可通过get方法查看特定键值
+              }
+          )
+
+          // AJAX获取页面内容
+          new Promise((resolve, reject) => {
+            let request = new XMLHttpRequest()
+            
+            request.open('post', api_url, true)
+            
+            request.onload = () => {
+              if (request.status === 200) {
+                // console.log('request', request)
+                const response = JSON.parse(request.response)
+                
+                resolve(response)
+              } else {
+                reject(Error(request.statusText))
+              }
+            }
+
+            request.onerror = () => {
+              reject(Error('Network Error'))
+            }
+
+            request.send(form_data)
+
+          }).then(data => {
+            // 输出DOM
+            // console.log(data.content)
+            that.source_html = data.content
+            
+            const tbody_dom = document.createElement('tbody')
+            tbody_dom.innerHTML = data.content
+            
+            const source_doms = tbody_dom.querySelectorAll('tr')
+            that.source_doms = source_doms
+
+            that.parse_doms(source_doms)
+          })
+        }, // end methods.curl
+        
+        parse_doms(doms) {
+          // console.log(doms)
+          
+          let items = []
+
+          for (let i = 0; i < doms.length; i++) {
+            let tds = doms[i].querySelectorAll('td')
+            
+            let item = {
+              code: tds[1].innerText,
+              name: tds[2].innerText.trim()
+            }
+            
+            items.push(item)
+          }
+          
+          this.items = items
+        } // end methods.parse_doms
+      } // end methods
+    })
+  </script>
+  <!-- end JavaScripts -->
+</body>
+</html>
