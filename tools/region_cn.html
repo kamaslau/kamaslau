@@ -4,10 +4,10 @@
   <meta charset=utf-8>
   <meta http-equiv=x-dns-prefetch-control content=on>
   <link rel=dns-prefetch href="https://cdn.liuyajie.com/">
-  <title>中华人民共和国县以上行政区划及代码</title>
+  <title>中华人民共和国省市区级行政区划名称及代码</title>
   <meta name=description content="">
   <meta name=keywords content="">
-  <meta name=version content="revision20200203">
+  <meta name=version content="revision20200204">
   <meta name=author content="KamasLau">
   <meta name=copyright content="KamasLau,GNU GPLv3.0">
   <meta name=contact content="kamaslau@dingtalk.com">
@@ -27,31 +27,28 @@
 <body>
   <header>
     <div class="container jumbotron">
-      <h1>中华人民共和国县以上行政区划及代码</h1>
+      <h1>中华人民共和国省市区级行政区划名称及代码</h1>
       <p>政府数据更新于 2019年12月25日</p>
+      <p class="text-warning">港澳台地区的市、区县级选择器需要手动处理一下。输出JSON结果见 https://npmjs.com/package/chinese_regions</p>
     </div>
   </header>
   
   <main id="app" class="row">
+    <div id="output" class="container">{{ dataset }}</div>
+
     <div class="col-12" class="container">
       source: {{ source }}
     </div>
 
-    <div id="source_html" class="container col">
+    <div v-if="result.length > 0" id="source_html" class="col">
       <h2>source_html</h2>
 
       <table>
         <tbody v-html="source_html"></tbody>
       </table>
     </div>
-  
-    <div id="items" class="container col">
-      <h2>items</h2>
-      
-      <pre>{{ items }}</pre>
-    </div>
   </main>
-  
+
   <footer>
     <div class=container>
       <p>&copy;2020 <a title="青岛外包开发、技术合伙人、全栈工程师 刘亚杰" href="https://www.liuyajie.com/">刘亚杰@青岛 - Lau,Kamas</a> <a rel="nofollow,noindex" href="http://www.beian.miit.gov.cn/" target="_blank">鲁ICP备16033133号</a></p>
@@ -71,35 +68,35 @@
         },
         source_html: '数据解析中',
         source_doms: null,
-        items: []
+        final: [],
+        dataset: {
+          province: [],
+          city: [],
+          county: []
+        },
+        result: ''
       },
       
       created() {
-        if (console) console.log('created with items: ', this.items)
-
         this.curl(this.source)
       },
       
       methods: {
         curl(source) {
           // console.log('method.curl called with url: ', url)
-          
           const that = this
           
+          // 请求URL及参数
           const api_url = 'https://api.imakp.liuyajie.com/tool/curl'
-
-          // 请求参数
-          const params = {
-            ...source
-          }
+          const params = { ...source }
 
           // 将参数转为FormData进行发送
           const form_data = new FormData()
           Object.keys(params).forEach(
-              key => {
-                form_data.append(key, params[key])
-                // console.log(form_data.get(key)) // FormData对象无法直接console.log，可通过get方法查看特定键值
-              }
+            key => {
+              form_data.append(key, params[key])
+              // console.log(form_data.get(key)) // FormData对象无法直接console.log，可通过get方法查看特定键值
+            }
           )
 
           // AJAX获取页面内容
@@ -126,10 +123,9 @@
             request.send(form_data)
 
           }).then(data => {
-            // 输出DOM
             // console.log(data.content)
             that.source_html = data.content
-            
+
             const tbody_dom = document.createElement('tbody')
             tbody_dom.innerHTML = data.content
             
@@ -140,23 +136,86 @@
           })
         }, // end methods.curl
         
+        // 解析DOM
         parse_doms(doms) {
           // console.log(doms)
+          const that = this
           
-          let items = []
-
-          for (let i = 0; i < doms.length; i++) {
-            let tds = doms[i].querySelectorAll('td')
-            
-            let item = {
-              code: tds[1].innerText,
-              name: tds[2].innerText.trim()
-            }
-            
-            items.push(item)
+          let final = [] // 结果数据
+          let dataset = {
+            province: [],
+            city: [],
+            county: []
           }
+
+          // 当前省、市、区县级行政区
+          let province, city, county
+
+          // 上一条数据行政层级；province,city,county
+          let last_level = ''
+
+          // 解析并结构化存储数据
+          for (let i = 0; i < doms.length; i++) {
+            const tds = doms[i].querySelectorAll('td')
+            const code = tds[1].innerText.trim() // 代码
+            const name = tds[2].innerText.trim() // 名称
+
+            const item = { code, name }
+            const is_province = code.lastIndexOf('0000') === 2
+            const is_city = !is_province && code.lastIndexOf('00') === 4
+            
+            // 按层级执行不同业务
+            if (is_province) {
+              // 省级
+              province = { ...item }
+              // 一并重置市级记录以兼容直辖市
+              city = {
+                p_code: item.code,
+                p_name: item.name,
+                ...item
+              }
+
+              last_level = 'province'
+              dataset.province.push(province)
+              
+            } else if (is_city) {
+              // 市级
+              city = {
+                p_code: province.code,
+                p_name: province.name,
+                ...item
+              }
+
+              last_level = 'city'
+              dataset.city.push(city)
+
+            } else {
+              // 若为直辖市下属区县，同时创建直辖市的市级记录
+              if (last_level === 'province') {
+                console.log('county under province: ', city)
+                dataset.city.push(city)
+              }
+
+              // 区县级
+              county = {
+                p_code: province.code,
+                p_name: province.name,
+                c_code: city.code,
+                c_name: city.name,
+                ...item
+              }
+
+              last_level = 'county'
+              dataset.county.push(county)
+              final.push(county)
+            }
+          } // end for-loop
           
-          this.items = items
+          that.dataset = dataset
+          that.final = JSON.stringify(final)
+
+          that.result = JSON.stringify(dataset)
+          console.log(that.result)
         } // end methods.parse_doms
       } // end methods
     })
