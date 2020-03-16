@@ -10,7 +10,7 @@
   <meta name="keywords" content="青岛创业,青岛合伙人,青岛天使投资,青岛天使投资人,青岛技术合伙人,青岛外包开发,刘亚杰">
   <meta name="description" content="刘亚杰是一位青岛的全栈工程师、外包开发者，也是为有前景的创业项目进行技术性投资的青岛天使投资人。">
   
-  <meta name="version" content="revision20200315">
+  <meta name="version" content="revision20200316">
   <meta name="copyright" content="刘亚杰">
   <meta name="author" content="Kamas Lau<kamaslau@dingtalk.com>">
   <meta name="contact" content="kamaslau@dingtalk.com">
@@ -40,7 +40,7 @@
     #identity .card {padding:0;}
 
     #header, #footer {font-size:.875rem;border-top: 1px solid rgba(255,255,255,.2);padding:1.875rem 0;}
-    #header {}
+    #header {text-align: center;}
       #header h1 {background:url('/images/logo/64x64.png') no-repeat left center;padding-left:72px;display:inline-block;}
     #footer {color: #fff;background-color:#303036;}
       #footer p {margin-bottom:0;}
@@ -59,7 +59,7 @@
 
 <body>
   <!-- 页首 -->
-  <header id="header" class="text-center">
+  <header id="header">
     <h1><a title="青岛创业者/技术合伙人、自由开发者、全栈工程师 刘亚杰" href="https://www.liuyajie.com/">刘亚杰 Kamas</a></h1>
     
     <!--
@@ -77,7 +77,7 @@
     
     <div id="notification">
       <div class="container alert alert-dark text-center">
-        <p>我目前参与的项目，众包招聘平台、图书/杂志/杂志交易平台、模特约拍平台，正在招募商务、营销合伙人及pre-A轮财务投资人。</p>
+        <p>我目前参与的项目，众包招聘平台、闲置图书交易平台、服饰约拍平台，正在招募商务、营销合伙人及pre-A轮财务投资人。</p>
         <a class="btn btn-default" href="tel:+86.17664073966">咨询详情</a>
       </div>
     </div>
@@ -362,11 +362,12 @@
       </div>
   
       <!-- 相关产品 -->
-      <ul>
-<!--        <li><a title="Doc4Apis" href="https://doc4apis.liuyajie.com/" target="_blank">Doc4Apis</a></li>-->
-        <li><a title="autolayouter" href="https://www.liuyajie.com/tools/autolayouter.html" target="_blank">autolayouter</a></li>
-        <li><a title="px2rem" href="https://www.liuyajie.com/tools/px2rem.html" target="_blank">px2rem</a></li>
-        <li><a title="chinese_regions" href="https://www.liuyajie.com/tools/region_cn.html" target="_blank">chinese_regions</a></li>
+      <ul class="row">
+<!--        <li class="col"><a title="Doc4Apis" href="https://doc4apis.liuyajie.com/" target="_blank">Doc4Apis</a></li>-->
+        <li class="col"><a title="中国图书馆分类法（中图法）第五版" href="https://www.zhongtufa.com/" target="_blank">中国图书馆分类法</a></li>
+        <li class="col"><a title="autolayouter" href="https://www.liuyajie.com/tools/autolayouter.html" target="_blank">autolayouter</a></li>
+        <li class="col"><a title="px2rem" href="https://www.liuyajie.com/tools/px2rem.html" target="_blank">px2rem</a></li>
+        <li class="col"><a title="chinese_regions" href="https://www.liuyajie.com/tools/region_cn.html" target="_blank">chinese_regions</a></li>
       </ul>
   
       <!-- UserAgent -->
@@ -386,15 +387,14 @@
       // 百度统计
       var _hmt = _hmt || [];
       (function() {
-        let hm = document.createElement('script')
-        hm.src = 'https://hm.baidu.com/hm.js?505c5a119bad835c9abbcbae864276dc'
-        let s = document.getElementsByTagName('script')[0]
+        var hm = document.createElement("script")
+        hm.src = "https://hm.baidu.com/hm.js?3d54b67ff18e23b0264597f748bdec88"
+        var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s)
-      })()
+      })();
     }
   </script>
   <!-- end JavaScripts -->
-
 </body>
 
 </html>
