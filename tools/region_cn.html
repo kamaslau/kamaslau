@@ -7,7 +7,7 @@
   <title>中华人民共和国省市区级行政区划名称及代码</title>
   <meta name=description content="">
   <meta name=keywords content="">
-  <meta name=version content="revision20200204">
+  <meta name=version content="revision20200410">
   <meta name=author content="KamasLau">
   <meta name=copyright content="KamasLau,GNU GPLv3.0">
   <meta name=contact content="kamaslau@dingtalk.com">
@@ -17,10 +17,6 @@
   <link rel="stylesheet" href="https://cdn.liuyajie.com/bootstrap/4.4.1/bootstrap.min.css">
   <style>
     html {font-size:16px;}
-    
-    @media only screen and (min-width:750px) {
-    
-    }
   </style>
 </head>
 
@@ -28,19 +24,16 @@
   <header>
     <div class="container jumbotron">
       <h1>中华人民共和国省市区级行政区划名称及代码</h1>
-      <p>政府数据更新于 2019年12月25日</p>
       <p class="text-warning">港澳台地区的市、区县级选择器需要手动处理一下。输出JSON结果见 https://npmjs.com/package/chinese_regions</p>
     </div>
   </header>
   
   <main id="app" class="row">
+    <p>政府数据更新于 2020年03月30日 @ {{ source.url }}</p>
+  
     <div id="output" class="container">{{ dataset }}</div>
 
-    <div class="col-12" class="container">
-      source: {{ source }}
-    </div>
-
-    <div v-if="result.length > 0" id="source_html" class="col">
+    <div v-if="show_source && result.length > 0" id="source_html" class="col">
       <h2>source_html</h2>
 
       <table>
@@ -65,12 +58,14 @@
       el: '#app',
       data: {
         source: {
-          url: 'http://www.mca.gov.cn/article/sj/xzqh/2019/2019/201912251506.html',
+          url: 'http://www.mca.gov.cn/article/sj/xzqh/2020/2020/202003301019.html',
           start_html: '<tr height=19',
           end_html: '<tr height=28'
         },
         source_html: '数据解析中',
         source_doms: null,
+        show_source: false, // 是否输出源数据到DOM
+        
         final: [],
         dataset: {
           province: [],
@@ -79,16 +74,16 @@
         },
         result: ''
       },
-      
+
       created() {
         this.curl(this.source)
       },
-      
+
       methods: {
         curl(source) {
           // console.log('method.curl called with url: ', url)
           const that = this
-          
+
           // 请求URL及参数
           const api_url = 'https://api.imakp.liuyajie.com/tool/curl'
           const params = { ...source }
@@ -139,7 +134,7 @@
           })
         }, // end methods.curl
         
-        // 解析DOM
+        // 解析DOM，生成结果数据
         parse_doms(doms) {
           // console.log(doms)
           const that = this
@@ -213,12 +208,16 @@
               final.push(county)
             }
           } // end for-loop
+          doms = undefined // 性能优化
           
-          that.dataset = dataset
           that.final = JSON.stringify(final)
+          final = undefined // 性能优化
 
+          that.dataset = dataset
           that.result = JSON.stringify(dataset)
-          console.log(that.result)
+          dataset = undefined // 性能优化
+          
+          // console.log(that.result)
         } // end methods.parse_doms
       } // end methods
     })
