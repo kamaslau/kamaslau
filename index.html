@@ -5,12 +5,13 @@
   <meta http-equiv=x-dns-prefetch-control content=on>
   <link rel=dns-prefetch href="https://cdn.liuyajie.com/">
   <link rel=dns-prefetch href="https://hm.baidu.com/">
+  <link rel=dns-prefetch href="https://res.wx.qq.com/">
 
   <title>刘亚杰Kamas - 青岛创业者/技术合伙人、自由开发者、全栈工程师</title>
   <meta name="keywords" content="青岛创业,青岛合伙人,青岛天使投资,青岛天使投资人,青岛技术合伙人,青岛外包开发,刘亚杰">
   <meta name="description" content="刘亚杰是一位青岛的全栈工程师、外包开发者，也是为有前景的创业项目进行技术性投资的青岛天使投资人。">
 
-  <meta name="version" content="revision20200902">
+  <meta name="version" content="revision20200903">
   <meta name="copyright" content="刘亚杰">
   <meta name="author" content="Kamas Lau<kamaslau@dingtalk.com>">
   <meta name="contact" content="kamaslau@dingtalk.com">
@@ -57,6 +58,11 @@
         #biography header p {color:#2c7ae7;}
       #biography>*:not(header) {color:#666;font-size:.875rem;line-height:1.5rem;margin-bottom:.938rem;}
   </style>
+
+  <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+  <script src="/sha1.js"></script>
+  <script src="/ajax.js"></script>
+  <script src="/wechat.js"></script>
 </head>
 
 <body>
@@ -380,8 +386,14 @@
     window.onload = () => {
       // 输出UserAgent
       const userAgent = navigator.userAgent
-      if (console) console.log('UserAgent', userAgent)
       document.getElementById('useragent').innerText = userAgent
+
+      // 微信业务
+      if (userAgent.indexOf('MicroMessenger') > -1) {
+        document.getElementById('useragent').innerText += ' is_wechat'
+
+        wechat_init()
+      }
 
       // 百度统计
       var _hmt = _hmt || [];
@@ -390,7 +402,7 @@
         hm.src = "https://hm.baidu.com/hm.js?505c5a119bad835c9abbcbae864276dc"
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s)
-      })();
+      })()
     }
   </script>
   <!-- end JavaScripts -->
