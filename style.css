@@ -36,10 +36,12 @@ figure {
  * 页首
  */
 #header {
-  position: relative;
+  position: fixed;
   z-index: 100;
   display: flex;
+  top: 0;
   height: 60px;
+  width: 100%;
   color: #fff;
   background: #243238;
   text-align: center;
@@ -99,7 +101,7 @@ figure {
 #office-hour {
   color: #90a4ae;
   font-size: 12px;
-  line-height: 18px;
+  line-height: 16px;
   align-self: flex-end;
 }
 
@@ -107,11 +109,37 @@ figure {
  * 主体
  */
 main {
+  margin-top: 60px;
   padding-top: 20px;
 }
 
 main .container {
   padding: 0 10px;
+}
+
+#case {
+  margin-bottom: 60px;
+}
+
+#case h1 {
+  font-size: 24px;
+  line-height: 30px;
+  margin-bottom: 40px;
+  padding: 20px;
+}
+
+#case h3 {
+  font-weight: 700;
+  line-height: 23px;
+  margin-bottom: 10px;
+}
+
+#sku-header {
+  position: relative;
+  display: flex;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px dashed #dde3e6;
 }
 
 .sku {
@@ -128,6 +156,32 @@ main .container {
 
 #budget {
   background-color: #f5f7f8;
+  padding: 20px;
+}
+
+#budget-header {
+  position: relative;
+  display: flex;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px dashed #dde3e6;
+}
+
+#budget-services {
+}
+.sku-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.sku-item > * {
+  padding: 0 8px;
+}
+.sku-item > :first-child {
+  flex-grow: 1;
+}
+.sku-item:first-of-type {
+  font-weight: bold;
 }
 
 #budget-summary {
@@ -141,12 +195,17 @@ main .container {
   flex-direction: column;
 }
 
-#budget-button {
-  background: linear-gradient(180deg, #1da650, #1b9b4a);
+.budget-button {
   font-size: 16px;
   height: 60px;
   line-height: 60px;
   border: 0;
+}
+.toggle_suggested {
+  background: linear-gradient(180deg, #1da650, #1b9b4a);
+}
+.toggle_required {
+  background: linear-gradient(180deg, #42a5f5, #2196f3);
 }
 
 /**
