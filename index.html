@@ -17,7 +17,7 @@
       content="刘亚杰是一位青岛的全栈工程师、外包开发者，也是为有前景的创业项目进行技术性投资的青岛天使投资人。"
     />
 
-    <meta name="version" content="revision20201030" />
+    <meta name="version" content="revision20201101" />
     <meta name="copyright" content="刘亚杰" />
     <meta name="author" content="Kamas Lau<kamaslau@dingtalk.com>" />
     <meta name="contact" content="kamaslau@dingtalk.com" />
@@ -56,7 +56,6 @@
       }
       li {
         list-style: none;
-        white-space: nowrap;
       }
       td:first-child {
         text-align: right;
@@ -168,7 +167,7 @@
       <div id="notification">
         <div class="container alert alert-dark text-center">
           <p>
-            我目前参与的项目，众包招聘平台、闲置图书交易平台、服饰约拍平台，正在招募商务、营销合伙人及pre-A轮财务投资人。
+            我目前参与的项目，众包招聘平台、商品分销平台，正在招募商务、营销合伙人及pre-A轮财务投资人。
           </p>
           <a class="btn btn-default" href="tel:+86.17664073966">咨询详情</a>
         </div>
@@ -535,6 +534,22 @@
             >
           </div>
           <!-- end #domain -->
+
+          <div id="readlist" class="section">
+            <h2>推荐书单</h2>
+
+            <ul class="row">
+              <li v-for="item in items" class="col-12 col-md-6 col-lg-3">
+                <a :title="item.name" :href="item.url_jd" target="_blank">
+                  <figure>
+                    <img :alt="item.name" :src="item.image_main_url" />
+                  </figure>
+                  <h3>{{ item.name }}</h3>
+                  <p>{{ item.slogan }}</p>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
         <!-- end #content>.container -->
       </div>
@@ -742,6 +757,8 @@
     </footer>
 
     <!-- JavaScripts -->
+    <!--<script src="https://unpkg.com/vue@next"></script>-->
+    <script src="vue.3.0.2.js"></script>
     <script
       asnyc
       src="https://cdn.liuyajie.com/fontawesome/5.12.1/js/all.min.js"
@@ -771,6 +788,60 @@
         })()
       }
     </script>
+
+    <script>
+      // 书单组件
+      const Readlist = {
+        data() {
+          return {
+            items: [
+              {
+                item_id: 1,
+                name: '凤凰项目：一个IT运维的传奇故事（修订版）',
+                slogan:
+                  '运维工程师教程书籍 DevOps沙盘演练蓝本 互联网企业必读 程序员的自我修养 用风趣的笔触教你如何使用“三步工作法” 一本引发全球IT从业者强烈共鸣的小说。',
+                image_main_url:
+                  'http://img3m2.ddimg.cn/28/0/27940402-1_u_3.jpg',
+                url_jd:
+                  'https://union-click.jd.com/jdc?e=&p=AyIGZRhfFQAbBlAfWRAyEgRTGlIdChc3EUQDS10iXhBeGlcJDBkNXg9JHUlSSkkFSRwSBFMaUh0KFxgMXgdIMhR%2FNm9FdUIRYgEcW0NRd3s0eAsRdnILWSteFAMTB1AZUxwGIgdUGlsdABUAVB9rJQITNwd1g6O0yqLkB4%2B%2FjcePwitZFAMSA1weWRcLIgdSGl4VBhIHVh5YEQIiAFUSa05XfAJXHQlGVUZQVE9fEAQiN1UYXRQLGg9QK1glMiIHZRhrV2wUV1ATU0EKRlMGGw4QVxJUXRhZRgIbD1YeDkYFFFcBTGsXAxMDXA%3D%3D'
+              },
+              {
+                item_id: 2,
+                name: '贫穷的本质：我们为什么摆脱不了贫穷（修订版）',
+                slogan:
+                  '探究穷人为什么无法摆脱贫穷的颠覆之作，诺贝尔经济学奖得主罗伯特.默顿·索洛、阿马蒂亚.森、《魔鬼经济学》作者列维特，《金融时报》《经济学人》《福布斯》《纽约时报》《金融时报》等推荐',
+                image_main_url:
+                  'http://img3m7.ddimg.cn/67/34/25327237-1_u_4.jpg',
+                url_jd:
+                  'https://union-click.jd.com/jdc?e=&p=AyIGZRhfFQAbBlAfWRAyEgRQG1kUBRI3EUQDS10iXhBeGlcJDBkNXg9JHUlSSkkFSRwSBFAbWRQFEhgMXgdIMhZVEU4eQFBzZAFfLVBERXoxfANsanILWSteFAMTB1AZUxwGIgdUGlsdABUAVB9rJQITNwd1g6O0yqLkB4%2B%2FjcePwitZFAMSA1weWRcLIgdSGl4VBhIOVxJbFwsiAFUSa05XfAJXHQlGVUZQVE9fEAQiN1UYXhUAEwBVK1glMiIHZRhrV2wXB1EYCUUAG1BTE18QBEJQXB1THQsRDgYcUxBRElJUGGsXAxMDXA%3D%3D'
+              },
+              {
+                item_id: 3,
+                name: '营销管理（第15版·彩色版）',
+                slogan:
+                  '营销管理是营销内容的前沿，因为它的内容和组织始终反映营销理论和实践的变化。在科特勒众多的著作中，这本《营销管理》无疑是凝聚了其*多心血，不断反映过去50多年营销学科的变化，也是最为全球学界和业界所接受和赞扬的经典教材，被誉为“营销圣经”。',
+                image_main_url:
+                  'http://img3m7.ddimg.cn/40/26/25252267-1_u_3.jpg',
+                url_jd:
+                  'https://union-click.jd.com/jdc?e=&p=AyIGZRhfFQAbBlAfWRAyEgRWG1kQABA3EUQDS10iXhBeGlcJDBkNXg9JHUlSSkkFSRwSBFYbWRAAEBgMXgdIMmBjLxpfHFsUYhFDHHRmVEwMfyVWYUQLWSteFAMTB1AZUxwGIgdUGlsdABUAVB9rJQITNwd1g6O0yqLkB4%2B%2FjcePwitZFAMSA1weWRcLIgdSGl4VBhECXRJaFgAiAFUSa05XfAJXHQlGVUZQVE9fEAQiN1UYWBUAFwVXK1glMiIHZRhrV2wVBlMaW0cHGgICTg4QUUABBUgMEAdFUl0bWRJSRwddSGsXAxMDXA%3D%3D'
+              },
+              {
+                item_id: 4,
+                name: '重新定义团队：谷歌如何工作',
+                slogan:
+                  '谷歌人才官首次公开谷歌人才和团队管理的核心秘籍。拉斯洛·博克是人才和团队管理的知名专家。他加入谷歌后，谷歌的员工数从六千增长到近五万，在全球四十多个国家设立了七十多个办公机构。让谷歌成为目前职业人士向往的工作地之一。',
+                image_main_url:
+                  'https://img14.360buyimg.com/n1/jfs/t1/38281/30/7774/162989/5cf094ffE36b61d17/354ed445f1e97cb1.jpg',
+                url_jd:
+                  'https://union-click.jd.com/jdc?e=&p=AyIGZRhfFQAbBlAfWRAyEgRRGFMTAhY3EUQDS10iXhBeGlcJDBkNXg9JHUlSSkkFSRwSBFEYUxMCFhgMXgdIMkZQPnsGSX5QZSt5X0xUcXMlTD0QcnILWSteFAMTB1AZUxwGIgdUGlsdABUAVB9rJQITNwd1g6O0yqLkB4%2B%2FjcePwitZFAMSA1weWRcLIgdSGl4VBhUFXBxdEwoiAFUSa05XfAJXHQlGVUZQVE9fEAQiN1UYXxYKFAdRK1glMiIHZRhrV2waA1ZLWUdXQQYCSFgQUhMOBhpaF1ZGV1MTXEZXRQcCE2sXAxMDXA%3D%3D'
+              }
+            ]
+          }
+        }
+      }
+      Vue.createApp(Readlist).mount('#readlist')
+    </script>
+
     <!-- end JavaScripts -->
   </body>
 </html>
