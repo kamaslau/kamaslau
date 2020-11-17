@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-dns-prefetch-control" content="on" />
+    <link rel="dns-prefetch" href="https://cdn.liuyajie.com/" />
+    <link rel="dns-prefetch" href="https://hm.baidu.com/" />
+    <!--<link rel="dns-prefetch" href="https://res.wx.qq.com/" />-->
+
+    <title>
+      咨询案号1603870200-01 演艺现场社交系统 | 刘亚杰Kamas -
+      青岛创业者/技术合伙人、自由开发者、全栈工程师
+    </title>
+    <meta
+      name="keywords"
+      content="青岛创业,青岛合伙人,青岛天使投资,青岛天使投资人,青岛技术合伙人,青岛外包开发,刘亚杰"
+    />
+    <meta
+      name="description"
+      content="刘亚杰是一位青岛的全栈工程师、外包开发者，也是为有前景的创业项目进行技术性投资的青岛天使投资人。"
+    />
+
+    <meta name="version" content="revision20201031" />
+    <meta name="copyright" content="刘亚杰" />
+    <meta name="author" content="Kamas Lau<kamaslau@dingtalk.com>" />
+    <meta name="contact" content="kamaslau@dingtalk.com" />
+    <meta name="version" content="alpha-0.0.1" />
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.liuyajie.com/bootstrap/4.5.3/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.liuyajie.com/common_reset/0.0.6/common_reset.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <link rel="apple-touch-icon" href="images/logo/128x128.png" />
+    <link rel="shortcut icon" href="images/logo/64x64.png" />
+
+    <!--
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <script src="/sha1.js"></script>
+    <script src="/ajax.js"></script>
+    <script src="/wechat.js"></script>
+    -->
+  </head>
+
+  <body>
+    <noscript>
+      <div class="alert alert-warning">
+        <p>您的浏览器未正常工作，请检查是否关闭了JavaScript相关功能。</p>
+      </div></noscript
+    >
+
+    <!-- 页首 -->
+    <header id="header">
+      <h1 id="logo">
+        <a
+          title="青岛创业者/技术合伙人、自由开发者、全栈工程师 刘亚杰"
+          href="https://www.liuyajie.com/"
+        >
+          <img
+            alt="青岛外包开发、技术合伙人、全栈工程师 刘亚杰"
+            src="images/avatar.jpg"
+          />刘亚杰Kamas
+        </a>
+      </h1>
+
+      <div id="header-contact">
+        <ul>
+          <li>
+            <a href="mailto:kamaslau@dingtalk.com" target="_blank"
+              ><i class="fal fa-envelope"></i
+            ></a>
+          </li>
+
+          <li>
+            <a href="tel:86.13668865673" target="_blank"
+              ><i class="fal fa-mobile"></i> 136-6886-5673
+            </a>
+            <span id="office-hour" :style="status_style">
+              <i class="fad fa-circle"></i>
+              <span
+                >{{ working ? '奋斗中 12:00 - 24:00': '准备中 00:00 - 12:00'
+                }}</span
+              >
+            </span>
+          </li>
+        </ul>
+      </div>
+    </header>
+
+    <!-- 主体部分 -->
+    <main role="main">
+      <div id="case">
+        <div class="container">
+          <h1>演艺现场社交系统</h1>
+          <p>案号<span>1603870200-01</span></p>
+
+          <div id="case-brief">
+            <div id="case-intro">
+              <p>该项目实施、运营地点均为中国青岛。</p>
+              <p>
+                该项目用于演艺演出场所的营收提升，通过提供多种活跃现场气氛、增加现场互动的功能来提高消费额。在前期接触中，运营方提供了可供参考的第三方软件系统，其中部分功能经面谈确认了必要性；在面谈过程中，运营方提出了礼品馈赠、人气榜单、佣金分润等功能需求。
+              </p>
+              <p>
+                在结束面谈后，我们现场消费观摩了位于中联广场的花儿胡同，并参考了采用了类似软件系统的其它商家。
+              </p>
+            </div>
+
+            <div id="case-summary">
+              <div id="case-comment">
+                <h3>综合说明</h3>
+                <p>
+                  根据以上需求分析和使用经验，现将相应的功能配置进行说明如下，并标注了预估完成各功能所需的工期；其中每个工时代表一个工作日（10小时）可完成的工作量。
+                </p>
+              </div>
+
+              <div id="case-team">
+                <h3>团队配置</h3>
+                <p>该项目将由刘亚杰负责。</p>
+                <p>该项目将由研发工程师、UI设计师等3名团队成员合作完成。</p>
+              </div>
+
+              <div id="case-platform">
+                <h3>技术平台</h3>
+                <p>
+                  经过评估，最适合该项目的技术平台是移动端网页，流量入口为微信公众号。
+                </p>
+                <p>
+                  由于该项目是一个新商业项目的线上线下结合技术平台，因而可以预期该平台将在一段时间内相对频繁地承载营销活动，更新升级技术功能，因而需要由第三方进行审核确认后才能更新升级的微信/支付宝小程序、iOS/Android原生APP等均无法满足该项目的需要。
+                </p>
+                <p>
+                  考虑到该项目的行业特殊性和被监管力度，微信/支付宝小程序有可能在不经事先通知的情况下被暂停甚至完全禁停运营，具有较高的商誉、财务，及市场风险。
+                </p>
+                <p>
+                  综上所述，该项目将通过低风险、更新升级快速，且推广成本低的微信公众号网页进行。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="sku">
+        <div class="container">
+          <div id="sku-header">
+            <h2>配置说明</h2>
+          </div>
+
+          <!-- 可选配功能 -->
+          <div v-for="(sku,index) in skus" class="card sku">
+            <div class="card-body">
+              <h3 class="card-title">
+                <span v-if="sku.required" class="badge badge-dark">必要</span>
+                <span v-else-if="sku.suggested" class="badge badge-secondary"
+                  >推荐</span
+                >
+                <span v-else class="badge badge-light">可选</span>
+                &nbsp;{{ sku.name }}
+              </h3>
+              <p class="card-text">{{ sku.description }}</p>
+            </div>
+            <div class="card-footer sku-footer">
+              <span class="sku-time"
+                ><i class="fal fa-calendar-alt"></i> {{ sku.time }}</span
+              >
+
+              <!-- 可用操作 -->
+              <a v-if="sku.required" href="#" class="btn btn-light sku-ops"
+                ><i class="fal fa-map-pin"></i> 必要模块</a
+              >
+              <a
+                v-else-if="sku.selected"
+                href="#"
+                @click.stop.prevent="skus[index].selected = false, renew_summray()"
+                class="btn btn-secondary sku-ops"
+                ><i class="fal fa-times"></i> 取消</a
+              >
+              <a
+                v-else
+                href="#"
+                @click.stop.prevent="skus[index].selected = true, renew_summray()"
+                class="btn btn-primary sku-ops"
+                ><i class="fal fa-plus"></i> 选配</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end #sku -->
+
+      <div id="budget">
+        <div class="container">
+          <div id="budget-header">
+            <h2>配置单</h2>
+          </div>
+
+          <div id="budget-services">
+            <ul>
+              <li class="sku-item">
+                <span>名称</span>
+                <span>工时</span>
+                <span>操作</span>
+              </li>
+
+              <template v-for="(sku,index) in skus">
+                <li class="sku-item">
+                  <div class="sku-name">
+                    <span
+                      v-if="sku.required"
+                      class="badge badge-pill badge-dark"
+                      >必要</span
+                    >
+                    <span
+                      v-else-if="sku.suggested"
+                      class="badge badge-pill badge-secondary"
+                      >推荐</span
+                    >
+                    <span v-else class="badge badge-pill badge-light"
+                      >可选</span
+                    >
+                    &nbsp;{{ sku.name }}
+                  </div>
+
+                  <div>{{ sku.time }}</div>
+
+                  <!-- 可用操作 -->
+                  <div>
+                    <a v-if="sku.required" @click.stop.prevent class="btn"
+                      ><i class="fal fa-map-pin"></i
+                    ></a>
+                    <a
+                      v-else-if="sku.selected"
+                      @click.stop.prevent="skus[index].selected = false, renew_summray()"
+                      class="btn btn-secondary"
+                      ><i class="fal fa-times"></i
+                    ></a>
+                    <a
+                      v-else
+                      @click.stop.prevent="skus[index].selected = true, renew_summray()"
+                      class="btn btn-primary"
+                      ><i class="fal fa-plus"></i
+                    ></a>
+                  </div>
+                </li>
+              </template>
+            </ul>
+          </div>
+
+          <!-- 预算概览 -->
+          <ul id="budget-summary">
+            <li>{{ duration }} <span>工时预计</span></li>
+            <li>{{ budget }} <span>人工预算</span></li>
+          </ul>
+
+          <a
+            class="btn btn-block btn-primary budget-button toggle_suggested"
+            @click.stop.prevent="check_suggested()"
+          >
+            <i class="fal fa-trophy"></i> 推荐配置
+          </a>
+
+          <a
+            class="btn btn-block btn-primary budget-button toggle_required"
+            @click.stop.prevent="check_required()"
+            >基本配置
+          </a>
+        </div>
+      </div>
+      <!-- end #budget -->
+    </main>
+
+    <!-- 页尾 -->
+    <footer id="footer">
+      <div class="container">
+        <div id="footer-bio">
+          <figure>
+            <img
+              alt="青岛外包开发、技术合伙人、全栈工程师 刘亚杰"
+              src="images/avatar.jpg"
+            />
+          </figure>
+
+          <p>
+            刘亚杰Kamas是中国青岛的创业者/技术合伙人、自由开发者、全栈工程师。
+          </p>
+
+          <ul id="footer-bio-list">
+            <li><span>2009</span> 起美国学习技术</li>
+            <li><span>10</span> 年研发经验</li>
+            <li><span>3</span> 企业持股合伙人</li>
+          </ul>
+        </div>
+
+        <div id="footer-info">
+          <!-- UserAgent -->
+          <p id="useragent" class="text-center text-mute"></p>
+
+          <p id="copyright">
+            &copy;2020
+            <a
+              title="青岛外包开发、技术合伙人、全栈工程师 刘亚杰"
+              href="https://www.liuyajie.com/"
+              >刘亚杰@青岛 - Lau,Kamas</a
+            >
+            <a
+              rel="nofollow,noindex"
+              href="http://www.beian.miit.gov.cn/"
+              target="_blank"
+              >鲁ICP备16033133号-1</a
+            >
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScripts -->
+    <!--<script src="https://unpkg.com/vue@next"></script>-->
+    <script src="vue.3.0.2.js"></script>
+    <script
+      asnyc
+      src="https://cdn.liuyajie.com/fontawesome/5.12.1/js/all.min.js"
+    ></script>
+    <script>
+      window.onload = () => {
+        // 输出UserAgent
+        const userAgent = navigator.userAgent
+        document.getElementById('useragent').innerText =
+          '快速测试信息 ' + '\r\n' + userAgent
+
+        // 微信业务
+        /*
+        if (userAgent.indexOf('MicroMessenger') > -1) {
+          document.getElementById('useragent').innerText += ' is_wechat'
+
+          wechat_init()
+        }
+        */
+
+        // 百度统计
+        var _hmt = _hmt || []
+        ;(function () {
+          var hm = document.createElement('script')
+          hm.src = 'https://hm.baidu.com/hm.js?505c5a119bad835c9abbcbae864276dc'
+          var s = document.getElementsByTagName('script')[0]
+          s.parentNode.insertBefore(hm, s)
+        })()
+      }
+    </script>
+    <script>
+      // 页首组件
+      const Header = {
+        data() {
+          return {
+            working: false,
+            status_style: 'color:#90a4ae'
+          }
+        },
+
+        mounted() {
+          this.renew_status()
+
+          setInterval(() => {
+            // 每隔一分钟获取当前小时数，并相应更新页首电话号码部分中工作状态
+            this.renew_status()
+          }, 1000 * 60)
+        },
+
+        methods: {
+          renew_status() {
+            const hour = new Date().getHours()
+            this.working = hour > 12 && hour < 24
+            this.status_style = 'color:' + (this.working ? 'green' : '#90a4ae')
+            //console.log(hour, this.working)
+          }
+        }
+      }
+      Vue.createApp(Header).mount('#header')
+
+      // 主体组件
+      const App = {
+        data() {
+          return {
+            skus: [
+              {
+                name: '公屏/公共聊天频道',
+                price: 0.8,
+                time: 4,
+                description:
+                  '显示并发送公共聊天信息，显示当前表演人员，显示人气榜单（被送礼、打赏、投票等）、土豪榜单（进行充值、送礼、点歌、打赏等）、打赏、点歌、交友功能的入口。系统可以设置各种互动/消费行为的显示形式及时间长度秒数，例如全屏动画、顶部滚动弹幕。',
+                required: true,
+                suggested: true,
+                selected: true
+              },
+              {
+                name: '土豪榜单',
+                price: 0.4,
+                time: 2,
+                description:
+                  '按支出消费金额的顺序，从高到低列出当日、当周、当月，及全时期各前20名用户的名次、头像、昵称、性别，及财富值（即消费额）信息，并提供充值功能入口。',
+                required: true,
+                suggested: true,
+                selected: true
+              },
+              {
+                name: '人气榜单',
+                price: 0.4,
+                time: 2,
+                description:
+                  '按收到礼品金额的顺序，从高到低列出当日、当周、当月，及全时期各前20名用户的名次、头像、昵称、性别，及人气值（即礼品金额）信息，并提供送礼功能入口。',
+                required: false,
+                suggested: true,
+                selected: true
+              },
+              {
+                name: '交友',
+                price: 1,
+                time: 5,
+                description:
+                  '用户可完善头像、昵称、个性签名、性别、交友性别喜好，上传自己的照片，并选择自己喜欢的店内商品（酒水餐品等）、平台礼品（虚拟礼品等）等进行公开。与点单系统结合，用户在点单、点歌后系统将自动提示用户完善交友资料。用户可查看其它交友用户，并进行送礼（虚拟礼品）、点单（实物商品）操作，提升活跃度及消费额。',
+                required: false,
+                suggested: true,
+                selected: true
+              },
+              {
+                name: '礼品',
+                price: 0.8,
+                time: 5,
+                description:
+                  '对店内虚拟商品进行登记、价格设置，客人可以选购并使用微信支付、支付宝支付进行购买，并赠予指定交友用户，收礼用户可选择是否与赠予者建立好友关系，提升活跃度及消费额。',
+                required: false,
+                suggested: true,
+                selected: true
+              },
+              {
+                name: '曲库',
+                price: 0.4,
+                time: 2,
+                description:
+                  '系统可以添加、修改、删除可被点唱的曲目资料，包括曲名、原唱者姓名、原唱语种（普通话、粤语、闽南语、英语、日语、韩语、法语、阿拉伯语、西班牙语、德语、俄语、其它）、所属地区（大陆、港澳台、日韩、欧美、东南亚、其它）、所属专辑名称、发布年份。',
+                required: false,
+                suggested: false,
+                selected: false
+              },
+
+              {
+                name: '点歌',
+                price: 0.6,
+                time: 3,
+                description:
+                  '对外包演艺人员的可演出曲目进行登记和标价。客人可以在歌单中进行选择，并将收到的点歌排队单显示到公屏榜单，提升活跃度及消费额。',
+                required: true,
+                suggested: true,
+                selected: true
+              },
+
+              {
+                name: '点单',
+                price: 1,
+                time: 5,
+                description:
+                  '对门票（若有）、店内实物商品和/或服务进行登记、价格、库存数量、在售状态等进行设置，客人可以选购并使用微信支付、支付宝支付进行购买。客人可以实时查看订单进程，了解自己的商品/服务已在制作、上桌过程中，减少催单、投诉等无利润服务对场内人员的人工消耗，将场内人工解放，尽量投入到气氛相关的效益提高相关工作中。和台号、台面二维码、客户账号进行结合，初次到店以后可以为客人推荐之前点过的商品，排队过程中可以尽量为客人预留之前坐过的位置和服务人员（若当班），充分让客户在熟悉的环境中提升掌控感，提升活跃度及消费额。',
+                required: false,
+                suggested: true,
+                selected: true
+              },
+              {
+                name: '演出打赏',
+                price: 0.8,
+                time: 4,
+                description:
+                  '对外包演艺人员进行登记、个人资料完善（头像、昵称、个性签名等），场内客户可以对整体演出和/或点歌单独进行打分、评价、打赏，并将收到的打赏凸显到公屏土豪榜单、霸屏消息，提升活跃度及消费额。系统可以内部查看上述信息，并根据人员所属、分值、打赏数额、时间记录进行排序查看。',
+                required: true,
+                suggested: true,
+                selected: true
+              },
+              {
+                name: '服务评价',
+                price: 0.6,
+                time: 3,
+                description:
+                  '对吧台、服务、气氛等店内服务人员进行登记、个人资料完善（头像、昵称、个性签名等），并生成二维码名片。场内客户可以对服务进行打分、文字评价、打赏，并将收到的打赏凸显到公屏土豪榜单、霸屏消息，提升活跃度及消费额。系统可以内部查看上述信息，并根据人员所属、分值、打赏数额、时间记录进行排序查看。',
+                required: false,
+                suggested: false,
+                selected: false
+              },
+              {
+                name: '佣金/分账',
+                price: 1,
+                time: 5,
+                description:
+                  '根据系统设置的比例和人员账号，将礼品、点单、点歌等购买行为，及打赏、评价等打赏行为产生的实际支付金额（即客户支付的总金额，含微信支付、支付宝支付等渠道将分润的支付线路手续费）按比例进行分账，明确销售收入与相应人员的佣金分润收入。',
+                required: false,
+                suggested: true,
+                selected: true
+              },
+              {
+                name: '用户钱包',
+                price: 0.8,
+                time: 4,
+                description:
+                  '对个人用户的充值/消费、内部员工、外包演艺人员等的收入、支出（送礼、点单等）流水记录和分润信息进行列表展示。显示收入、支出流水，提供发起提现、充值操作的入口。被提现金额将通过微信钱包进行发放。',
+                required: true,
+                suggested: true,
+                selected: true
+              },
+              {
+                name: '财务管理',
+                price: 1.2,
+                time: 4,
+                description:
+                  '对平台所有收入（礼品、点单、打赏、评价等）、支出（分佣等）流水记录进行列表展示，财务人员据此进行相关操作，并可对支出项的状态进行已取消、待支付、已支付等标记调整。',
+                required: true,
+                suggested: true,
+                selected: true
+              },
+              {
+                name: '营销日历',
+                price: 0.8,
+                time: 4,
+                description:
+                  '以日历的形式，将每天的店内活动，演出、出场演艺团队按星期进行预告。系统可以根据日期发布上述事项、捆绑外包演艺人员等，并可进行修改调整。与点歌、点单系统结合，进行预点歌、预点单、台位预订、门票预售等，提前完成备货、预收资金。',
+                required: false,
+                suggested: true,
+                selected: true
+              },
+              {
+                name: '社交小游戏平台',
+                price: 1.6,
+                time: 8,
+                description:
+                  '研发推出适合场内社交，简明易懂的小型手机游戏。基于现场观摩和以往经验，该功能使用率低，模块投入产出比较低，建议不选配。此处暂以3款小游戏进行工期和费用相关测算。',
+                required: false,
+                suggested: false,
+                selected: false
+              }
+            ],
+            salary: 0.18, // 日薪（万元）
+            duration: 0, // 工期（天）
+            budget: 0 // 预算（万元）
+          }
+        },
+
+        watch: {
+          skus(now, was) {
+            console.log('skus changed to ', now, ' from ', was)
+            this.renew_summray()
+          }
+        },
+
+        mounted() {
+          this.renew_summray()
+        },
+
+        methods: {
+          // 根据已选项计算工时及预算
+          renew_summray() {
+            console.log('renew_summray called')
+            this.duration = this.budget = 0 // 重置统计性数据
+
+            this.skus.forEach((item) => {
+              if (item.selected) {
+                this.duration += item.time
+              }
+              this.budget = (this.duration * this.salary).toFixed(2)
+            })
+          },
+
+          // 显示推荐配置
+          check_suggested() {
+            // 选中全部被推荐项
+            this.skus.forEach((item, index) => {
+              this.skus[index].selected = item.suggested ? true : false
+            })
+
+            this.renew_summray()
+          },
+
+          // 显示必要配置
+          check_required() {
+            this.skus.forEach((item, index) => {
+              this.skus[index].selected = item.required ? true : false
+            })
+
+            this.renew_summray()
+          }
+        }
+      }
+      Vue.createApp(App).mount('main')
+    </script>
+    <!-- end JavaScripts -->
+  </body>
+</html>
