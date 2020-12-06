@@ -1,5 +1,5 @@
-a {
-  text-decoration: none;
+* {
+  box-sizing: border-box;
 }
 
 html {
@@ -16,20 +16,60 @@ body {
 /**
  * BootStrap重置
  */
+
+a,
+a:hover {
+  text-decoration: none;
+}
+
+a:hover,
+a:active,
+a:visited {
+  color: #aaa;
+}
+
 h1 {
   margin-bottom: 0;
 }
+
 dl,
 ol,
 ul {
   margin: 0;
 }
+
+li {
+  list-style: none;
+}
+
+td:first-child {
+  text-align: right;
+}
+
+
 figure {
   margin: 0;
 }
+
+figcaption {
+  text-align: center;
+}
+
 .btn {
   padding-top: 0;
   padding-bottom: 0;
+}
+
+.row {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 95%;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
 }
 
 /**
@@ -58,6 +98,7 @@ figure {
   display: flex;
   align-items: center;
 }
+
 #logo a {
   display: flex;
   flex-grow: 1;
@@ -65,6 +106,7 @@ figure {
   justify-content: center;
   padding: 0 10px;
 }
+
 #logo img {
   width: 32px;
   height: 32px;
@@ -145,10 +187,12 @@ main .container {
 .sku {
   margin-bottom: 20px;
 }
+
 .sku-footer {
   display: flex;
   justify-content: space-between;
 }
+
 .sku-ops {
   flex-grow: 2;
   max-width: 50%;
@@ -167,19 +211,22 @@ main .container {
   border-bottom: 1px dashed #dde3e6;
 }
 
-#budget-services {
-}
+#budget-services {}
+
 .sku-item {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
 }
-.sku-item > * {
+
+.sku-item>* {
   padding: 0 8px;
 }
-.sku-item > :first-child {
+
+.sku-item> :first-child {
   flex-grow: 1;
 }
+
 .sku-item:first-of-type {
   font-weight: bold;
 }
@@ -189,6 +236,7 @@ main .container {
   margin: 10px;
   display: flex;
 }
+
 #budget-summary li {
   flex-grow: 1;
   display: flex;
@@ -201,9 +249,11 @@ main .container {
   line-height: 60px;
   border: 0;
 }
+
 .toggle_suggested {
   background: linear-gradient(180deg, #1da650, #1b9b4a);
 }
+
 .toggle_required {
   background: linear-gradient(180deg, #42a5f5, #2196f3);
 }
@@ -224,29 +274,37 @@ main .container {
   padding: 40px 20px 0;
 }
 
+#footer a {
+  color: #b0bec5;
+}
+
+#outlinks {
+  margin: 40px 0;
+}
+
+#outlinks a {
+  display: flex;
+  height: 44px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#outlinks ul:not(:last-child) {margin-bottom:30px;}
+
 #footer-bio {
   color: #b0bec5;
   margin-bottom: 40px;
 }
+
 #footer-bio figure {
   display: flex;
   margin-bottom: 20px;
   align-items: center;
   justify-content: center;
 }
+
 #footer-bio p {
   margin-bottom: 0;
-}
-
-#footer-bio-list {
-  margin-bottom: 40px;
-}
-#footer-bio-list span {
-  color: #ff8a65;
-}
-#footer-bio-list li {
-  display: inline-block;
-  margin: 20px 20px 0;
 }
 
 #footer-info {
