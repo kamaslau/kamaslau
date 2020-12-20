@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang=zh-cn>
+
 <head>
   <meta charset=utf-8>
   <meta http-equiv=x-dns-prefetch-control content=on>
@@ -7,29 +8,65 @@
   <title>px2rem</title>
   <meta name=description content="">
   <meta name=keywords content="">
-  <meta name=version content="revision20200202">
+  <meta name=version content="revision20201220">
   <meta name=author content="KamasLau">
   <meta name=copyright content="KamasLau,GNU GPLv3.0">
   <meta name=contact content="kamaslau@dingtalk.com">
 
   <meta name=viewport content="width=device-width">
-  
-  <link rel="stylesheet" href="https://cdn.liuyajie.com/bootstrap/4.4.1/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://cdn.liuyajie.com/bootstrap/4.5.3/bootstrap.min.css">
   <style>
-    html {font-size:16px;}
-    
-    input {text-align:center;font-weight:bold;}
-    
-    #selector {text-align:center;display:flex;justify-content:space-between;}
-      #selector>* {flex-grow:1;}
-      #selector>div {display:flex;flex-direction:column;align-items:center;}
-      #selector span {font-size:3rem;}
-      #selector input {font-size:2.5rem;width:8rem;}
-    
+    html {
+      font-size: 16px;
+    }
+
+    body {
+      font-size: 1rem;
+    }
+
+    input {
+      text-align: center;
+      font-weight: bold;
+    }
+
+    #selector {
+      text-align: center;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    #selector>* {
+      flex-grow: 1;
+    }
+
+    #selector>div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #selector span {
+      font-size: 3rem;
+    }
+
+    #selector input {
+      font-size: 2.5rem;
+      width: 8rem;
+    }
+
     @media only screen and (min-width:750px) {
-      #selector {justify-content:center;}
-        #selector>* {flex-grow:0;}
-        #selector span {width:5rem;}
+      #selector {
+        justify-content: center;
+      }
+
+      #selector>* {
+        flex-grow: 0;
+      }
+
+      #selector span {
+        width: 5rem;
+      }
     }
   </style>
 </head>
@@ -42,7 +79,7 @@
     </div>
   </header>
 
-  <main id="app">
+  <main id="app" class="container-fluid">
     <div id="converter" class="container">
       <h2>转换器</h2>
 
@@ -59,9 +96,10 @@
         </div>
       </div>
     </div>
-    
+
     <div id="quick-ref" class="container">
       <h2>速查表</h2>
+      <p>当根字号为 <strong>{{ html_size }}</strong> 时：</p>
 
       <table class="table table-hover table-striped text-center">
         <thead class="thead-light">
@@ -70,7 +108,7 @@
             <th>rem</th>
           </tr>
         </thead>
-        
+
         <tbody>
           <tr v-for="i in 50" :key="'px-' + i">
             <td>{{ i }}</td>
@@ -83,8 +121,9 @@
 
   <footer>
     <div class=container>
-      <p>&copy;2020 <a title="青岛外包开发、技术合伙人、全栈工程师 刘亚杰" href="https://www.liuyajie.com/">刘亚杰@青岛 - Lau,Kamas</a> <a rel="nofollow,noindex" href="http://www.beian.miit.gov.cn/" target="_blank">鲁ICP备16033133号</a></p>
-  
+      <p>&copy;2020 <a title="青岛外包开发、技术合伙人、全栈工程师 刘亚杰" href="https://www.liuyajie.com/">刘亚杰@青岛 - Lau,Kamas</a> <a
+          rel="nofollow,noindex" href="http://www.beian.miit.gov.cn/" target="_blank">鲁ICP备16033133号</a></p>
+
       <!-- UserAgent -->
       <p id="useragent" class="text-smaller text-center"></p>
     </div>
@@ -127,7 +166,7 @@
 
       // 百度统计
       var _hmt = _hmt || [];
-      (function() {
+      (function () {
         var hm = document.createElement("script")
         hm.src = "https://hm.baidu.com/hm.js?3d54b67ff18e23b0264597f748bdec88"
         var s = document.getElementsByTagName("script")[0];
@@ -137,4 +176,5 @@
   </script>
   <!-- end JavaScripts -->
 </body>
+
 </html>

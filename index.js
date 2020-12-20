@@ -1,3 +1,5 @@
+"use strict";
+
 window.onload = () => {
   // 输出UserAgent
   const userAgent = navigator.userAgent

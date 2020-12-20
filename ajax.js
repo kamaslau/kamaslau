@@ -1,3 +1,5 @@
+"use strict";
+
 const common_params = {}
 
 // 请求方法

@@ -1,3 +1,5 @@
+"use strict";
+
 function encodeUTF8(s) {
     var i, r = [], c, x;
     for (i = 0; i < s.length; i++)

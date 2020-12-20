@@ -1,3 +1,5 @@
+"use strict";
+
 const weconfig = {
   appid: 'wx8102f428f22a5a56',
   appsecret: '520d7aecf5ee3260a0bfcb7c86a5bed5',
