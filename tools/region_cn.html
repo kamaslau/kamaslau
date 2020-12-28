@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang=zh-cn>
+
 <head>
   <meta charset=utf-8>
   <meta http-equiv=x-dns-prefetch-control content=on>
@@ -7,50 +8,125 @@
   <title>中华人民共和国省市区级行政区划名称及代码</title>
   <meta name=description content="">
   <meta name=keywords content="">
-  <meta name=version content="revision20200410">
+  <meta name=version content="revision20201229">
   <meta name=author content="KamasLau">
   <meta name=copyright content="KamasLau,GNU GPLv3.0">
   <meta name=contact content="kamaslau@dingtalk.com">
-  
+
   <meta name=viewport content="width=device-width">
 
-  <link rel="stylesheet" href="https://cdn.liuyajie.com/bootstrap/4.4.1/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.liuyajie.com/bootstrap/4.5.3/bootstrap.min.css">
   <style>
-    html {font-size:16px;}
+    html {
+      font-size: 14px;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #display {
+      flex-grow: 1;
+    }
+
+    .datalist {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .datalist ul {
+      overflow: scroll;
+    }
+
+    footer {
+      margin-top: auto;
+    }
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="container jumbotron">
+  <header class="navbar navbar-light bg-light">
+    <div class="container-fluid">
       <h1>中华人民共和国省市区级行政区划名称及代码</h1>
-      <p class="text-warning">港澳台地区的市、区县级选择器需要手动处理一下。输出JSON结果见 https://npmjs.com/package/chinese_regions</p>
+      <p>政府数据更新于 2020年11月20日</p>
     </div>
   </header>
-  
-  <main id="app" class="row">
-    <p>政府数据更新于 2020年03月30日 @ {{ source.url }}</p>
-  
-    <div id="output" class="container">{{ dataset }}</div>
 
-    <div v-if="show_source && result.length > 0" id="source_html" class="col">
+  <main id="app" class="container-fluid">
+    <p class="text-center">
+      <span
+        :class="{ 'text-danger': status==='api', 'text-warning': status==='parse', 'text-success': status==='done' }">{{ message }}</span>；港澳台地区的市、区县级选择器需要手动处理一下。
+      <a class="btn btn-outline-primary" href="https://npmjs.com/package/chinese_regions"
+        target="_blank">待输出格式（JSON）</a>
+      <a class="btn btn-outline-primary" :href="source.url" target="_blank">数据源</a>
+      <button class="btn btn-primary" type="button" @click.prevent="parse_doms" :disabled="status!='done'">重新解析</button>
+    </p>
+
+    <div id="display" class="row">
+      <div id="output" class="col" :class="show_source? 'col-md-6': ''">
+
+        <div class="row">
+          <div class="datalist col">
+            <h3>dataset</h3>
+            <textarea class="col form-control" :readonly="status !== 'done'">{{ dataset }}</textarea>
+          </div>
+
+          <div class="datalist col">
+            <h3>dataset.<strong>province</strong></h3>
+            <ul class="list-unstyled">
+              <li v-for="item in dataset.province">{{ item.code }} | {{ item.name }}</li>
+            </ul>
+          </div>
+
+          <div class="datalist col">
+            <h3>dataset.<strong>city</strong></h3>
+            <ul class="list-unstyled">
+              <li v-for="item in dataset.city">{{ item.code }} | {{ item.p_name }} {{ item.name }}
+              </li>
+            </ul>
+          </div>
+
+          <div class="datalist col">
+            <h3>dataset.<strong>county</strong></h3>
+            <ul class="list-unstyled">
+              <li v-for="item in dataset.county">{{ item.code }} | {{ item.p_name }} {{ item.c_name }} {{ item.name }}
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div v-if="show_source && result.length > 0" id="source_html" class="col" :class="show_source? 'col-md-6': ''">
       <h2>source_html</h2>
 
       <table>
         <tbody v-html="source_html"></tbody>
       </table>
     </div>
+    </div>
   </main>
 
-  <footer>
-    <div class=container>
-      <p>&copy;2020 <a title="青岛外包开发、技术合伙人、全栈工程师 刘亚杰" href="https://www.liuyajie.com/">刘亚杰@青岛 - Lau,Kamas</a> <a rel="nofollow,noindex" href="http://www.beian.miit.gov.cn/" target="_blank">鲁ICP备16033133号</a></p>
-  
+  <footer class="bg-light">
+    <div class="container-fluid">
+      <p>&copy;2020 <a title="青岛外包开发、技术合伙人、全栈工程师 刘亚杰" href="https://www.liuyajie.com/">刘亚杰@青岛 - Lau,Kamas</a> <a
+          rel="nofollow,noindex" href="http://www.beian.miit.gov.cn/" target="_blank">鲁ICP备16033133号</a></p>
+
       <!-- UserAgent -->
       <p id="useragent" class="text-smaller text-center"></p>
     </div>
   </footer>
-  
+
   <!-- JavaScripts -->
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script>
@@ -58,14 +134,17 @@
       el: '#app',
       data: {
         source: {
-          url: 'http://www.mca.gov.cn/article/sj/xzqh/2020/2020/202003301019.html',
+          url: 'http://www.mca.gov.cn/article/sj/xzqh/2020/2020/2020112010001.html',
           start_html: '<tr height=19',
           end_html: '<tr height=28'
         },
         source_html: '数据解析中',
         source_doms: null,
         show_source: false, // 是否输出源数据到DOM
-        
+
+        message: '',
+        status: '', // api请求中、parse解析中、done完成
+
         final: [],
         dataset: {
           province: [],
@@ -86,7 +165,9 @@
 
           // 请求URL及参数
           const api_url = 'https://api.imakp.liuyajie.com/tool/curl'
-          const params = { ...source }
+          const params = {
+            ...source
+          }
 
           // 将参数转为FormData进行发送
           const form_data = new FormData()
@@ -100,14 +181,14 @@
           // AJAX获取页面内容
           new Promise((resolve, reject) => {
             let request = new XMLHttpRequest()
-            
+
             request.open('post', api_url, true)
-            
+
             request.onload = () => {
               if (request.status === 200) {
                 // console.log('request', request)
                 const response = JSON.parse(request.response)
-                
+
                 resolve(response)
               } else {
                 reject(Error(request.statusText))
@@ -118,27 +199,34 @@
               reject(Error('Network Error'))
             }
 
+            that.status = 'api'
+            that.message = '正在请求数据'
+
             request.send(form_data)
 
           }).then(data => {
+            that.message = '服务器请求已完成，正在解析数据'
             // console.log(data.content)
-            that.source_html = data.content
+            if (this.show_source) {
+              that.source_html = data.content
+            }
 
             const tbody_dom = document.createElement('tbody')
             tbody_dom.innerHTML = data.content
-            
-            const source_doms = tbody_dom.querySelectorAll('tr')
-            that.source_doms = source_doms
 
-            that.parse_doms(source_doms)
+            that.source_doms = tbody_dom.querySelectorAll('tr')
+            that.parse_doms()
           })
         }, // end methods.curl
-        
+
         // 解析DOM，生成结果数据
-        parse_doms(doms) {
-          // console.log(doms)
+        parse_doms() {
+          console.clear()
+
           const that = this
-          
+          let doms = that.source_doms
+          that.status = 'parse'
+
           let final = [] // 结果数据
           let dataset = {
             province: [],
@@ -146,7 +234,7 @@
             county: []
           }
 
-          // 当前省、市、区县级行政区
+          // 当前省、市、区/县级行政区
           let province, city, county
 
           // 上一条数据行政层级；province,city,county
@@ -158,14 +246,44 @@
             const code = tds[1].innerText.trim() // 代码
             const name = tds[2].innerText.trim() // 名称
 
-            const item = { code, name }
+            const item = {
+              code,
+              name
+            }
             const is_province = code.lastIndexOf('0000') === 2
             const is_city = !is_province && code.lastIndexOf('00') === 4
-            
+
             // 按层级执行不同业务
             if (is_province) {
+              // 若为直辖市、SAR下一条记录，同时补录上一条的市、区级记录
+              if (last_level === 'province') {
+                console.log('province under province, current: ', item)
+                city = {
+                  p_code: province.code,
+                  p_name: province.name,
+                  ...province
+                }
+                console.log('province under province, append city: ', city)
+                dataset.city.push(city)
+
+                county = {
+                  p_code: province.code,
+                  p_name: province.name,
+                  c_code: province.code,
+                  c_name: province.name,
+                  ...province
+                }
+                console.log('province under province, append county: ', county)
+                dataset.county.push(county)
+              }
+
               // 省级
-              province = { ...item }
+              province = {
+                ...item
+              }
+              dataset.province.push(province)
+              last_level = 'province'
+
               // 一并重置市级记录以兼容直辖市
               city = {
                 p_code: item.code,
@@ -173,9 +291,6 @@
                 ...item
               }
 
-              last_level = 'province'
-              dataset.province.push(province)
-              
             } else if (is_city) {
               // 市级
               city = {
@@ -183,14 +298,13 @@
                 p_name: province.name,
                 ...item
               }
-
-              last_level = 'city'
               dataset.city.push(city)
+              last_level = 'city'
 
             } else {
-              // 若为直辖市下属区县，同时创建直辖市的市级记录
+              // 若为直辖市、SAR下一条记录，同时补录上一条的市级记录
               if (last_level === 'province') {
-                console.log('county under province: ', city)
+                console.log('county under province, append city: ', city)
                 dataset.city.push(city)
               }
 
@@ -202,37 +316,40 @@
                 c_name: city.name,
                 ...item
               }
-
-              last_level = 'county'
               dataset.county.push(county)
-              final.push(county)
+              last_level = 'county'
+              final.push(county) // 推入末级
+
             }
           } // end for-loop
           doms = undefined // 性能优化
-          
+
           that.final = JSON.stringify(final)
           final = undefined // 性能优化
 
           that.dataset = dataset
           that.result = JSON.stringify(dataset)
           dataset = undefined // 性能优化
-          
+
+          that.message = '数据解析完成'
+          that.status = 'done'
+
           // console.log(that.result)
         } // end methods.parse_doms
       } // end methods
     })
   </script>
-  
+
   <script defer>
     window.onload = () => {
-      // 输出UserAgent
-      const userAgent = navigator.userAgent
-      if (console) console.log('UserAgent', userAgent)
-      document.getElementById('useragent').innerText = userAgent
+      // // 输出UserAgent
+      // const userAgent = navigator.userAgent
+      // if (console) console.log('UserAgent', userAgent)
+      // document.getElementById('useragent').innerText = userAgent
 
       // 百度统计
       var _hmt = _hmt || [];
-      (function() {
+      (function () {
         var hm = document.createElement("script")
         hm.src = "https://hm.baidu.com/hm.js?3d54b67ff18e23b0264597f748bdec88"
         var s = document.getElementsByTagName("script")[0];
@@ -242,4 +359,5 @@
   </script>
   <!-- end JavaScripts -->
 </body>
+
 </html>
