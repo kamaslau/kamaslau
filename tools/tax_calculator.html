@@ -1,32 +1,40 @@
 <!DOCTYPE html>
 <html lang=zh-cn>
+
 <head>
   <meta charset=utf-8>
   <meta http-equiv=x-dns-prefetch-control content=on>
   <link rel=dns-prefetch href="https://cdn.liuyajie.com/">
-  <title>个人所得税计算器2020 - 劳务报酬所得</title>
+  <title>个人所得税计算器2021 - 劳务报酬所得</title>
   <meta name=description content="">
   <meta name=keywords content="">
-  <meta name=version content="revision20200705">
+  <meta name=version content="revision20210110">
   <meta name=author content="KamasLau">
   <meta name=copyright content="KamasLau,GNU GPLv3.0">
   <meta name=contact content="kamaslau@dingtalk.com">
 
   <meta name=viewport content="width=device-width">
-  
-  <link rel="stylesheet" href="https://cdn.liuyajie.com/bootstrap/4.5.0/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://cdn.liuyajie.com/bootstrap/4.5.3/bootstrap.min.css">
   <style>
-    html {font-size:16px;}
-    .container {width:95%;}
+    html {
+      font-size: 16px;
+    }
+
+    .container {
+      width: 95%;
+    }
   </style>
 </head>
 
 <body>
   <header>
     <div class="container">
-      <h1>个人所得税计算器2020</h1>
+      <h1>个人所得税计算器2021</h1>
       <h2>劳务报酬所得</h2>
-      <p class="alert alert-light">劳务报酬所得，是指个人从事设计、装潢、安装、制图、化验、测试、医疗、法律、会计、咨询、讲学、新闻、广播、翻译、审稿、书画、雕刻、影视、录音、录像、演出、表演、广告、展览、技术服务、介绍服务、经纪服务、代办服务以及其他劳务取得的所得。此项税款一般由支付方代扣代缴，个人无需申报。</p>
+      <p class="alert alert-light">
+        劳务报酬所得，是指个人从事设计、装潢、安装、制图、化验、测试、医疗、法律、会计、咨询、讲学、新闻、广播、翻译、审稿、书画、雕刻、影视、录音、录像、演出、表演、广告、展览、技术服务、介绍服务、经纪服务、代办服务以及其他劳务取得的所得。此项税款一般由支付方代扣代缴，个人无需申报。
+      </p>
     </div>
   </header>
 
@@ -36,23 +44,25 @@
         <fieldset>
           <div class="form-group row">
             <label class="form-label">收入总额</label>
-            
+
             <div class="input-group">
               <div class="input-group-prepend">
                 <div class="input-group-text">￥</div>
               </div>
-              <input class="form-control form-control-lg" type="number" step="0.01" min="0.01" v-model.trim.number="income" autofocus required>
+              <input class="form-control form-control-lg" type="number" step="0.01" min="0.01"
+                v-model.trim.number="income" autofocus required>
             </div>
           </div>
         </fieldset>
-        
+
         <ul class="list-unstyled row">
           <li class="col-4"><button class="btn btn-block btn-light" type="reset" @click="form_reset">清空</button></li>
-          <li class="col-8"><button class="btn btn-block btn-primary" type="submit" @click="form_submit">算一算</button></li>
+          <li class="col-8"><button class="btn btn-block btn-primary" type="submit" @click="form_submit">算一算</button>
+          </li>
         </ul>
       </form>
     </div>
-  
+
     <div id="info-list" class="container card">
       <dl>
         <dt>免税额</dt>
@@ -73,19 +83,19 @@
             </li>
           </ul>
         </dd>
-      
+
         <dt>应税额</dt>
         <dd>￥ {{ taxable }}</dd>
-      
+
         <dt>税率</dt>
         <dd>{{ rate * 100 }}%</dd>
-  
+
         <dt>速算扣除数</dt>
         <dd>￥ {{ exempt }}</dd>
-  
+
         <dt>税金</dt>
         <dd class="text-danger">￥ {{ tax }}</dd>
-      
+
         <dt>税后收入</dt>
         <dd class="text-success">￥ {{ net_income }}</dd>
       </dl>
@@ -94,7 +104,8 @@
 
   <footer>
     <div class="container text-center">
-      <p>&copy;2020 <a title="青岛外包开发、技术合伙人、全栈工程师 刘亚杰" href="https://www.liuyajie.com/">刘亚杰@青岛 - Lau,Kamas</a> <a rel="nofollow,noindex" href="http://www.beian.miit.gov.cn/" target="_blank">鲁ICP备16033133号</a></p>
+      <p>&copy;2021 <a title="青岛外包开发、技术合伙人、全栈工程师 刘亚杰" href="https://www.liuyajie.com/">刘亚杰@青岛 - Lau,Kamas</a> <a
+          rel="nofollow,noindex" href="http://www.beian.miit.gov.cn/" target="_blank">鲁ICP备16033133号</a></p>
     </div>
   </footer>
 
@@ -112,7 +123,7 @@
         tax: 0, // 税金
         net_income: 0 // 净收入
       },
-  
+
       methods: {
         form_reset() {
           this.income = null
@@ -123,51 +134,51 @@
           this.get_rate()
           this.get_tax()
           this.get_net()
-  
+
           window.scrollTo({
             top: 500
           })
         },
-        
+
         // 计算应税额
         get_allowance() {
           if (this.income > 0 && this.income <= 800) {
             this.allowance = this.income
-    
+
           } else if (this.income > 800 && this.income <= 4000) {
             this.allowance = 800
-    
+
           } else if (this.income > 4000) {
             this.allowance = this.income * .2
-    
+
           }
-          
+
           this.allowance = this.allowance.toFixed(2)
-  
+
           this.taxable = (this.income - this.allowance).toFixed(2)
         },
-        
+
         // 计算税率
         get_rate() {
           if (this.taxable <= 20000) {
             this.rate = .2
-            
+
           } else if (this.taxable > 20000 && this.taxable <= 50000) {
             this.rate = .3
-            
+
           } else if (this.taxable > 50000) {
             this.rate = .4
           }
         },
-        
+
         // 计算税额
         get_tax() {
           if (this.taxable === 0) {
             this.tax = 0
-            
+
           } else {
             this.tax = this.taxable * this.rate
-            
+
             // 使用速算扣除数对阶梯税率进行修正
             if (this.taxable > 20000 && this.taxable <= 50000) {
               this.exempt = 2000
@@ -176,16 +187,16 @@
             }
             this.tax -= this.exempt
           }
-  
+
           this.tax = this.tax.toFixed(2)
         },
-        
+
         // 计算净收入
         get_net() {
           this.net_income = (this.income - this.tax).toFixed(2)
         }
       }
-      
+
     })
   </script>
 
@@ -194,7 +205,7 @@
     window.onload = () => {
       // 百度统计
       var _hmt = _hmt || [];
-      (function() {
+      (function () {
         var hm = document.createElement("script")
         hm.src = "https://hm.baidu.com/hm.js?505c5a119bad835c9abbcbae864276dc"
         var s = document.getElementsByTagName("script")[0];
@@ -204,4 +215,5 @@
   </script>
   <!-- end JavaScripts -->
 </body>
+
 </html>
