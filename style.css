@@ -19,6 +19,7 @@ body {
 a,
 a:hover {
   text-decoration: none;
+  color: inherit;
 }
 
 a:hover,
@@ -72,6 +73,12 @@ figcaption {
 }
 
 /**
+ * 品牌VI；优先级最高
+ */
+ .vi-express {color:#c8252c !important;}
+ .vi-udemy {color:#ec5252 !important;}
+
+/**
  * 页首
  */
 #header {
@@ -85,6 +92,10 @@ figcaption {
   background: #243238;
   text-align: center;
   justify-content: space-between;
+}
+
+#header+* {
+  margin-top: 60px;
 }
 
 #header a {
@@ -150,12 +161,15 @@ figcaption {
  * 主体
  */
 main {
-  margin-top: 60px;
   padding-top: 20px;
 }
 
 main .container {
   padding: 0 10px;
+}
+
+main .section+* {
+  margin-top: 30px;
 }
 
 #case {
